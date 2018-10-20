@@ -1,5 +1,20 @@
 Page({
 
+  answer: function (e) {
+    wx.navigateTo({
+      url: 'src/pages/answer/answer'
+    })
+  },
+  check: function (e) {
+    wx.navigateTo({
+      url: 'src/pages/check/check'
+    })
+  },
+  record: function (e) {
+    wx.navigateTo({
+      url: 'src/pages/record/record'
+    })
+  },
   /**
    * 页面的初始数据
    */
@@ -7,15 +22,18 @@ Page({
     menu: [
       {
         name: '学生记录',
-        iconImageSrc: '/images/record.png'
+        iconImageSrc: '/images/record.png',
+        cf: 'record'
       },
       {
         name: '主动回答',
-        iconImageSrc: '/images/answer.png'
+        iconImageSrc: '/images/answer.png',
+        cf: 'answer'
       },
       {
         name: '随机抽问',
-        iconImageSrc: '/images/check.png'
+        iconImageSrc: '/images/check.png',
+        cf: 'check'
       },
     ]
   },

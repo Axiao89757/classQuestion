@@ -1,5 +1,8 @@
 {
   "pages": [
-    "src/pages/homepage/homepage"
+    "src/pages/homepage/homepage",
+    "src/pages/answer/answer",
+    "src/pages/check/check",
+    "src/pages/record/record"
   ]
 }

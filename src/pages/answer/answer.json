@@ -1,1 +1,5 @@
-{}
+{
+  "navigationBarBackgroundColor": "#f7f7f7",
+  "navigationBarTitleText": "主动回答",
+  "navigationBarTextStyle": "black"  
+}
