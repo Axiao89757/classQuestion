@@ -1,0 +1,25 @@
+<view class='all'>
+  <!--头部，头像和当前班级部分-->
+  <view class='head'>
+    <!--头像-->
+    <view class='headPortrait'>
+      <image  style='width: 150rpx; height: 150rpx;' src='/images/headPortrait.png'></image>
+    </view>
+    <!--文字-->
+    <view class='current'>
+      <view class='currentClass'>当前班级：</view>
+      <text class='className'>电子信息工程1、2班</text>
+    </view>
+  </view>
+
+  <!--划线-->
+  <canvas canvas-id='myCanvas' class='line'></canvas>
+  <!--菜单部分，记录、主动回答、随机抽查-->
+  <view class='menu'>
+    <button class='menuButtom' wx:for='{{menu}}'>
+      <image class='buttonImage' src='{{item.iconImageSrc}}'></image>
+      <text class='buttonName'>{{item.name}}</text>
+    </button>
+  </view>
+</view>
+

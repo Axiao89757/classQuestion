@@ -1,0 +1,67 @@
+.all {
+
+}
+
+/*头部，头像和当前班级部分*/
+.head {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.current {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding: 25rpx;
+  padding-left: 60rpx;
+}
+
+.headPortrait {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx;
+}
+
+.currentClass {
+  font-size: 30rpx;
+  color: #5C5C5C;
+}
+
+.className {
+  font-weight: bold;
+}
+
+/*划线*/
+.line {
+  width: 87%;
+  height: 15rpx;
+  margin-left: 48rpx;
+}
+
+/*菜单部分，记录、主动回答、随机抽查*/
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menuButtom {
+  width: 90%;
+  margin-top: 20rpx;
+  
+  display: flex;
+  align-items: center;
+}
+
+.buttonImage {
+  margin: 10rpx;
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 20rpx;
+}
+
+.buttonName {
+  font-size: 30rpx;
+}
