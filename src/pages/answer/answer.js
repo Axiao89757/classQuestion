@@ -45,7 +45,7 @@ Page({
       },
       {
         degree: "勉强",
-        score: "+2",
+        score: "+1",
         images: "/images/forth.png",
         check: 'touch2',
         state: true,

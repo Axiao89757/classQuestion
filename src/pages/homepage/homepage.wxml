@@ -16,8 +16,8 @@
   <canvas canvas-id='myCanvas' class='line'></canvas>
   <!--菜单部分，记录、主动回答、随机抽查-->
   <view class='menu'>
-    <button class='menuButtom' wx:for='{{menu}}'>
-      <image class='buttonImage' src='{{item.iconImageSrc}}' bindtap='{{item.cf}}'></image>
+    <button class='menuButtom' wx:for='{{menu}}' bindtap='{{item.cf}}'>
+      <image class='buttonImage' src='{{item.iconImageSrc}}'></image>
       <text class='buttonName'>{{item.name}}</text>
     </button>
   </view>

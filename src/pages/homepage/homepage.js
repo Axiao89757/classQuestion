@@ -2,17 +2,17 @@ Page({
 
   answer: function (e) {
     wx.navigateTo({
-      url: 'src/pages/answer/answer'
+      url: '/src/pages/answer/answer'
     })
   },
   check: function (e) {
     wx.navigateTo({
-      url: 'src/pages/check/check'
+      url: '/src/pages/check/check'
     })
   },
   record: function (e) {
     wx.navigateTo({
-      url: 'src/pages/record/record'
+      url: '/src/pages/record/record'
     })
   },
   /**

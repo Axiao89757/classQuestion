@@ -21,7 +21,7 @@
 
   <!--注释部分-->
   <view class='comment'>
-    <textarea class='subComment' placeholder='注释（记录学生上课详情）'></textarea>
+    <textarea class='subComment' placeholder='  注释（记录学生上课详情）'></textarea>
     <!--提交按钮-->
     <button class='submit'><text class='submitText'>提 交</text></button>
   </view>
