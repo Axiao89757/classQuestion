@@ -10,13 +10,10 @@
 
   <!--评分部分-->
   <view class='selection'>
-    <scroll-view style='height:50vh;'
-      scroll-y="true">
-      <button class='scroll-buttons'  wx:for='{{grade}}' bindtap="{{item.check}}" style='{{item.color}}'>
-        <text class='buttons-text1'>{{item.degree}} <text class='buttons-text2'>{{item.score}}分</text></text>
-        <image src='{{item.images}}' class='buttons-picture'></image>
-      </button>
-    </scroll-view>
+    <button class='scroll-buttons'  wx:for='{{grade}}' bindtap="touchSelect" data-site='{{item.site}}' style='{{item.form}}'>
+      <text class='buttons-text1'>{{item.degree}} <text class='buttons-text2'>{{item.score}}分</text></text>
+      <image src='{{item.images}}' class='buttons-picture'></image>
+    </button>
   </view>
 
   <!--注释部分-->

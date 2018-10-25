@@ -1,12 +1,13 @@
 .all {
-
+  height: 100vh;
+  background-color: #f7f7f7;
 }
 
 /*头部，头像和当前班级部分*/
 .head {
   display: flex;
   flex-direction: column;
-
+  background-color: #f7f7f7;
 }
 
 .headPortrait {
@@ -32,6 +33,7 @@
 
 .className {
   font-weight: bold;
+  font-size: 35rpx;
 }
 
 /*划线*/
@@ -46,6 +48,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #f7f7f7;
 }
 
 .menuButtom {
@@ -54,12 +57,13 @@
   
   display: flex;
   align-items: center;
+  background-color: white;
 }
 
 .buttonImage {
   margin: 10rpx;
-  width: 100rpx;
-  height: 100rpx;
+  width: 120rpx;
+  height: 120rpx;
   margin-right: 20rpx;
 }
 

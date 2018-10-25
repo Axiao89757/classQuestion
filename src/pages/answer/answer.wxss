@@ -71,11 +71,16 @@
 }
 
 /*注释部分*/
-.comment{
-  width: 100%;
-  border-style: solid;
-  border-color: #9C9C9C;
+.comment {
+  width: 95%;
   background: #fff;
+}
+
+.subComment {
+  width: auto;
+  margin-bottom: 20rpx;
+  border-style: solid;
+  border-color: black;
 }
 
 .submitText {

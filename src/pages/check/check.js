@@ -17,408 +17,362 @@ Page({
    */
   data: {
     number:"00",
-    state:-1,
+    
     grade: [
       {
         degree:"完美",
         score:"+5",
-        images:"/images/first.png",
-        check: 'touch5', 
-        state: true,
-        color: "background-color: #fff"
+        images:"/images/first.png", 
+
+        site: 0,
+        flag: false,
+        form: 'background-color: white'
       },
       {
         degree: "很好",
         score: "+3",
         images: "/images/second.png",
-        check: 'touch4',
-        state: true,
-        color: "background-color: #fff"
+
+        site: 1,
+        flag: false,
+        form: 'background-color: white'
       },
       {
         degree: "还行",
         score: "+2",
         images: "/images/third.png",
-        check: 'touch3',
-        state: true,
-        color: "background-color: #fff"
+
+        site: 2,
+        flag: false,
+        form: 'background-color: white'
       },
       {
         degree: "勉强",
         score: "+1",
         images: "/images/forth.png",
-        check: 'touch2',
-        state: true,
-        color: "background-color: #fff"
+
+        site: 3,
+        flag: false,
+        form: 'background-color: white'
       },
       {
         degree: "不行",
         score: "+0",
         images: "/images/smile.png",
-        check: 'touch1',
-        state: true,
-        color: "background-color: #fff"
+
+        site: 4,
+        flag: false,
+        form: 'background-color: white'
       },
       {
         degree: "请假",
         score: "+0",
         images: "/images/leave.png",
-        check: 'touchleave',
-        state: true,
-        color: "background-color: #fff"
+
+        site: 5,
+        flag: false,
+        form: 'background-color: white'
       },
       {
         degree: "迟到",
         score: "-1",
         images: "/images/lated.png",
-        check: 'touchlate',
-        state: true,
-        color: "background-color: #fff"
+
+        site: 6,
+        flag: false,
+        form: 'background-color: white'
       },
       {
         degree: "缺席",
         score: "-3",
         images: "/images/absent.png",
-        check: 'touchabsent',
-        state: true,
-        color: "background-color: #fff"
+
+        site: 7,
+        flag: false,
+        form: 'background-color: white'
       },
       {
         degree: "出国",
         score: "-100",
         images: "/images/abroad.png",
-        check: 'touchabroad',
-        state: true,
-        color: "background-color: #fff"
+
+        site: 8,
+        flag: false,
+        form: 'background-color: white'
       },
-    ]
+    ],
+
+    // 数据准备
+    lastSite: -1,
+    selectedForm: 'border-style: solid; border-width: 7rpx; border-color: black; background-color: white;',
+    defaultForm: 'background-color: white;',
   },
 
-  touch5: function (e) {
-    var color='grade[0].color'
-    var stateb = 'grade[0].state'
-    var statei = this.data.state
-    if (statei==0)
-    {
-      if (this.data.grade[0].state) {
-        this.setData({
-          [color]: 'background-color: #99cc99',
-          [stateb]: false,
-          state:0
-        })
-      }
-      else {
-        this.setData({
-          [color]: 'background-color: #fff',
-          [stateb]: true,
-          state:0
-        })}
+
+  /**
+   * 勾选函数
+   */
+  touchSelect: function (event) {
+    var site = event.target.dataset.site // 变量准备
+
+    if (this.data.lastSite == -1) { // 1、第一次点击需要对lastSite进行初始化，让它等于当前site
+      this.setData({
+        lastSite: site
+      })
     }
     
-    else if (statei == -1) {
-      this.setData({
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 0
-      })
-      }
-
-    else{
-
-      this.setData({
-          ['grade[' + statei + '].color']: 'background-color: #fff',
-          ['grade[' + statei + '].state']: 'true',
-          [color]: 'background-color: #99cc99',
-          [stateb]: false,
-          state: 0
+    switch (site) { // 用switch遍历全部的情况
+      case 0:
+        if (site == this.data.lastSite) { // 2、先判断当前点击位置是否与上一次相同
+          if (this.data.grade[site].flag) { // 2.1、相同，则判断上一次的状态是否为亮的
+            this.setData({ // 2.1.1、flag为true，说明上一次为亮的，需要执行熄灭操作
+              ['grade[' + site + '].form']: this.data.defaultForm,
+              ['grade[' + site + '].flag']: false
+            })
+          } 
+          else { 
+            this.setData({ // 2.1.2、flag为false，说明上一次为暗的，需要执行点亮操作，并将flag转为false
+              ['grade[' + site + '].form']: this.data.selectedForm,
+              ['grade[' + site + '].flag']: true
+            })
+          }
+        } 
+        else {
+          this.setData({ // 2.2、不同，则需要熄灭上一个位置，然后点亮当前位置，并更改相应的flag
+            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
+            ['grade[' + this.data.lastSite + '].flag']: false,
+            ['grade[' + site + '].form']: this.data.selectedForm,
+            ['grade[' + site + '].flag']: true
+          })
+        } 
+        this.setData({ // 3、重置lastSite，使它指向当前位置
+          lastSite: site
         })
-    }
-  },
+        break;
 
-  touch4: function (e) {
-    var color = 'grade[1].color'
-    var stateb = 'grade[1].state'
-    var statei = this.data.state
-    if (statei == 1) {
-      if (this.data.grade[1].state) {
+      case 1:
+        if (site == this.data.lastSite) {
+          if (this.data.grade[site].flag) {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.defaultForm,
+              ['grade[' + site + '].flag']: false
+            })
+          }
+          else {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.selectedForm,
+              ['grade[' + site + '].flag']: true
+            })
+          }
+        }
+        else {
+          this.setData({
+            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
+            ['grade[' + this.data.lastSite + '].flag']: false,
+            ['grade[' + site + '].form']: this.data.selectedForm,
+            ['grade[' + site + '].flag']: true
+          })
+        }
         this.setData({
-          [color]: 'background-color: #99cc99',
-          [stateb]: false,
-          state: 1
+          lastSite: site
         })
-      }
-      else {
+        break;
+
+      case 2:
+        if (site == this.data.lastSite) {
+          if (this.data.grade[site].flag) {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.defaultForm,
+              ['grade[' + site + '].flag']: false
+            })
+          }
+          else {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.selectedForm,
+              ['grade[' + site + '].flag']: true
+            })
+          }
+        }
+        else {
+          this.setData({
+            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
+            ['grade[' + this.data.lastSite + '].flag']: false,
+            ['grade[' + site + '].form']: this.data.selectedForm,
+            ['grade[' + site + '].flag']: true
+          })
+        }
         this.setData({
-          [color]: 'background-color: #fff',
-          [stateb]: true,
-          state: 1
+          lastSite: site
         })
-      }
-    }
+        break;
 
-    else if (statei == -1) {
-      this.setData({
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 1
-      })
-    }
-
-    else {
-      this.setData({
-        ['grade[' + statei + '].color']: 'background-color: #fff',
-        ['grade[' + statei + '].state']: 'true',
-          [color]: 'background-color: #99cc99',
-          [stateb]: false,
-          state: 1
-        })
-      
-    }
-  },
-
-  touch3: function (e) {
-    var color = 'grade[2].color'
-    var stateb = 'grade[2].state'
-    var statei = this.data.state
-    if (statei == 2) {
-      if (this.data.grade[2].state) {
+      case 3:
+        if (site == this.data.lastSite) {
+          if (this.data.grade[site].flag) {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.defaultForm,
+              ['grade[' + site + '].flag']: false
+            })
+          }
+          else {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.selectedForm,
+              ['grade[' + site + '].flag']: true
+            })
+          }
+        }
+        else {
+          this.setData({
+            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
+            ['grade[' + this.data.lastSite + '].flag']: false,
+            ['grade[' + site + '].form']: this.data.selectedForm,
+            ['grade[' + site + '].flag']: true
+          })
+        }
         this.setData({
-          [color]: 'background-color: #99cc99',
-          [stateb]: false,
-          state: 2
+          lastSite: site
         })
-      }
-      else {
+        break;
+
+      case 4:
+        if (site == this.data.lastSite) {
+          if (this.data.grade[site].flag) {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.defaultForm,
+              ['grade[' + site + '].flag']: false
+            })
+          }
+          else {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.selectedForm,
+              ['grade[' + site + '].flag']: true
+            })
+          }
+        }
+        else {
+          this.setData({
+            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
+            ['grade[' + this.data.lastSite + '].flag']: false,
+            ['grade[' + site + '].form']: this.data.selectedForm,
+            ['grade[' + site + '].flag']: true
+          })
+        }
         this.setData({
-          [color]: 'background-color: #fff',
-          [stateb]: true,
-          state: 2
+          lastSite: site
         })
-      }
-    }
+        break;
 
-    else if (statei == -1) {
-      this.setData({
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 2
-      })
-    }
-
-    else {
-
-      this.setData({
-        ['grade[' + statei + '].color']: 'background-color: #fff',
-        ['grade[' + statei + '].state']: 'true',
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 2
-      })
-    }
-  },
-
-  touch2: function (e) {
-    var color = 'grade[3].color'
-    var stateb = 'grade[3].state'
-    var statei = this.data.state
-    if (statei == 3) {
-      if (this.data.grade[3].state) {
+      case 5:
+        if (site == this.data.lastSite) {
+          if (this.data.grade[site].flag) {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.defaultForm,
+              ['grade[' + site + '].flag']: false
+            })
+          }
+          else {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.selectedForm,
+              ['grade[' + site + '].flag']: true
+            })
+          }
+        }
+        else {
+          this.setData({
+            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
+            ['grade[' + this.data.lastSite + '].flag']: false,
+            ['grade[' + site + '].form']: this.data.selectedForm,
+            ['grade[' + site + '].flag']: true
+          })
+        }
         this.setData({
-          [color]: 'background-color: #99cc99',
-          [stateb]: false,
-          state: 3
+          lastSite: site
         })
-      }
-      else {
+        break;
+
+      case 6:
+        if (site == this.data.lastSite) {
+          if (this.data.grade[site].flag) {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.defaultForm,
+              ['grade[' + site + '].flag']: false
+            })
+          }
+          else {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.selectedForm,
+              ['grade[' + site + '].flag']: true
+            })
+          }
+        }
+        else {
+          this.setData({
+            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
+            ['grade[' + this.data.lastSite + '].flag']: false,
+            ['grade[' + site + '].form']: this.data.selectedForm,
+            ['grade[' + site + '].flag']: true
+          })
+        }
         this.setData({
-          [color]: 'background-color: #fff',
-          [stateb]: true,
-          state: 3
+          lastSite: site
         })
-      }
-    }
+        break;
 
-    else if (statei == -1) {
-      this.setData({
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 3
-      })
-    }
-
-    else {
-
-      this.setData({
-        ['grade[' + statei + '].color']: 'background-color: #fff',
-        ['grade[' + statei + '].state']: 'true',
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 3
-      })
-    }
-  },
-
-  touchleave: function (e) {
-    var color = 'grade[4].color'
-    var stateb = 'grade[4].state'
-    var statei = this.data.state
-    if (statei == 4) {
-      if (this.data.grade[4].state) {
+      case 7:
+        if (site == this.data.lastSite) {
+          if (this.data.grade[site].flag) {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.defaultForm,
+              ['grade[' + site + '].flag']: false
+            })
+          }
+          else {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.selectedForm,
+              ['grade[' + site + '].flag']: true
+            })
+          }
+        }
+        else {
+          this.setData({
+            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
+            ['grade[' + this.data.lastSite + '].flag']: false,
+            ['grade[' + site + '].form']: this.data.selectedForm,
+            ['grade[' + site + '].flag']: true
+          })
+        }
         this.setData({
-          [color]: 'background-color: #99cc99',
-          [stateb]: false,
-          state: 4
+          lastSite: site
         })
-      }
-      else {
+        break;
+
+      case 8:
+        if (site == this.data.lastSite) {
+          if (this.data.grade[site].flag) {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.defaultForm,
+              ['grade[' + site + '].flag']: false
+            })
+          }
+          else {
+            this.setData({
+              ['grade[' + site + '].form']: this.data.selectedForm,
+              ['grade[' + site + '].flag']: true
+            })
+          }
+        }
+        else {
+          this.setData({
+            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
+            ['grade[' + this.data.lastSite + '].flag']: false,
+            ['grade[' + site + '].form']: this.data.selectedForm,
+            ['grade[' + site + '].flag']: true
+          })
+        }
         this.setData({
-          [color]: 'background-color: #fff',
-          [stateb]: true,
-          state: 4
+          lastSite: site
         })
-      }
-    }
-
-    else if (statei == -1) {
-      this.setData({
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 4
-      })
-    }
-
-    else {
-
-      this.setData({
-        ['grade[' + statei + '].color']: 'background-color: #fff',
-        ['grade[' + statei + '].state']: 'true',
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 4
-      })
-    }
-  },
-
-  touchlate: function (e) {
-    var color = 'grade[5].color'
-    var stateb = 'grade[5].state'
-    var statei = this.data.state
-    if (statei == 5) {
-      if (this.data.grade[5].state) {
-        this.setData({
-          [color]: 'background-color: #99cc99',
-          [stateb]: false,
-          state: 5
-        })
-      }
-      else {
-        this.setData({
-          [color]: 'background-color: #fff',
-          [stateb]: true,
-          state: 5
-        })
-      }
-    }
-
-    else if (statei == -1) {
-      this.setData({
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 5
-      })
-    }
-
-    else {
-
-      this.setData({
-        ['grade[' + statei + '].color']: 'background-color: #fff',
-        ['grade[' + statei + '].state']: 'true',
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 5
-      })
-    }
-  },
-
-  touchabsent: function (e) {
-    var color = 'grade[6].color'
-    var stateb = 'grade[6].state'
-    var statei = this.data.state
-    if (statei == 6) {
-      if (this.data.grade[6].state) {
-        this.setData({
-          [color]: 'background-color: #99cc99',
-          [stateb]: false,
-          state: 6
-        })
-      }
-      else {
-        this.setData({
-          [color]: 'background-color: #fff',
-          [stateb]: true,
-          state: 6
-        })
-      }
-    }
-
-    else if (statei == -1) {
-      this.setData({
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 6
-      })
-    }
-
-    else {
-
-      this.setData({
-        ['grade[' + statei + '].color']: 'background-color: #fff',
-        ['grade[' + statei + '].state']: 'true',
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 6
-      })
-    }
-  },
-
-  touchabroad: function (e) {
-    var color = 'grade[7].color'
-    var stateb = 'grade[7].state'
-    var statei = this.data.state
-    if (statei == 7) {
-      if (this.data.grade[7].state) {
-        this.setData({
-          [color]: 'background-color: #99cc99',
-          [stateb]: false,
-          state: 7
-        })
-      }
-      else {
-        this.setData({
-          [color]: 'background-color: #fff',
-          [stateb]: true,
-          state: 7
-        })
-      }
-    }
-
-    else if (statei == -1) {
-      this.setData({
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 7
-      })
-    }
-
-    else {
-
-      this.setData({
-        ['grade[' + statei + '].color']: 'background-color: #fff',
-        ['grade[' + statei + '].state']: 'true',
-        [color]: 'background-color: #99cc99',
-        [stateb]: false,
-        state: 7
-      })
+        break;
     }
   }
 })
