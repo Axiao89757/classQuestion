@@ -1,22 +1,29 @@
 Page({
+
+  onLoad: function (options) {
+    // 获取主页传过来的随机号码
+    this.setData({
+      number: options.randomDigit
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function (e) {
+  onReady: function (options) {
+    // 划线
     var ct1 = wx.createCanvasContext('myCanvas')
     ct1.moveTo(0, 0)
     ct1.lineTo(1000, 0)
     ct1.setLineWidth(8)
     ct1.stroke()
     ct1.draw()
-
   },
 
   /**
    * 页面的初始数据
    */
   data: {
-    number:"00",
+    number: '00',
     
     grade: [
       {

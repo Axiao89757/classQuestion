@@ -6,8 +6,10 @@ Page({
     })
   },
   check: function (e) {
+    var randomDigit = Math.floor(Math.random() * 93)
+    console.log(randomDigit)
     wx.navigateTo({
-      url: '/src/pages/check/check'
+      url: '/src/pages/check/check?randomDigit=' + randomDigit
     })
   },
   record: function (e) {
