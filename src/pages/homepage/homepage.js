@@ -1,13 +1,40 @@
 Page({
 
-  answer: function (e) {
+  //取消
+  cancel: function () {
+    this.setData({
+      hiddenmodalput: true
+    });
+  },
+  
+  //确认  
+  confirm: function () {
+    if (this.inputNumber < 0 || this.inputNumber > 92)
     wx.navigateTo({
-      url: '/src/pages/answer/answer'
+      url: '/src/pages/answer/answer?studentNumber=' + "错误"
+    })
+    wx.navigateTo({
+      url: '/src/pages/answer/answer?studentNumber=' + this.inputNumber
+    })
+    this.setData({
+      hiddenmodalput: true
     })
   },
+
+  // 输入
+  bindKeyInput: function(e) {
+    this.inputNumber = e.detail.value //注意这里不能用this.setData
+
+  },
+
+  answer: function (e) {
+    this.setData({
+      hiddenmodalput: false,
+    })
+  },
+
   check: function (e) {
     var randomDigit = Math.floor(Math.random() * 93)
-    console.log(randomDigit)
     wx.navigateTo({
       url: '/src/pages/check/check?randomDigit=' + randomDigit
     })
@@ -21,6 +48,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    hiddenmodalput: true,
+    inputNumber: '00',
     menu: [
       {
         name: '学生记录',

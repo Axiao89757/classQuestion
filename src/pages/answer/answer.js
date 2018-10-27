@@ -1,4 +1,12 @@
 Page({
+
+  onLoad: function (options) {
+    // 获取主页传过来的随机号码
+    this.setData({
+      studentNumber: options.studentNumber
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -16,8 +24,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    number: "00",
-    state: -1,
+    studentNumber: '00',
+
     grade: [
       {
         degree: "完美",
@@ -225,90 +233,6 @@ Page({
         break;
 
       case 5:
-        if (site == this.data.lastSite) {
-          if (this.data.grade[site].flag) {
-            this.setData({
-              ['grade[' + site + '].form']: this.data.defaultForm,
-              ['grade[' + site + '].flag']: false
-            })
-          }
-          else {
-            this.setData({
-              ['grade[' + site + '].form']: this.data.selectedForm,
-              ['grade[' + site + '].flag']: true
-            })
-          }
-        }
-        else {
-          this.setData({
-            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
-            ['grade[' + this.data.lastSite + '].flag']: false,
-            ['grade[' + site + '].form']: this.data.selectedForm,
-            ['grade[' + site + '].flag']: true
-          })
-        }
-        this.setData({
-          lastSite: site
-        })
-        break;
-
-      case 6:
-        if (site == this.data.lastSite) {
-          if (this.data.grade[site].flag) {
-            this.setData({
-              ['grade[' + site + '].form']: this.data.defaultForm,
-              ['grade[' + site + '].flag']: false
-            })
-          }
-          else {
-            this.setData({
-              ['grade[' + site + '].form']: this.data.selectedForm,
-              ['grade[' + site + '].flag']: true
-            })
-          }
-        }
-        else {
-          this.setData({
-            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
-            ['grade[' + this.data.lastSite + '].flag']: false,
-            ['grade[' + site + '].form']: this.data.selectedForm,
-            ['grade[' + site + '].flag']: true
-          })
-        }
-        this.setData({
-          lastSite: site
-        })
-        break;
-
-      case 7:
-        if (site == this.data.lastSite) {
-          if (this.data.grade[site].flag) {
-            this.setData({
-              ['grade[' + site + '].form']: this.data.defaultForm,
-              ['grade[' + site + '].flag']: false
-            })
-          }
-          else {
-            this.setData({
-              ['grade[' + site + '].form']: this.data.selectedForm,
-              ['grade[' + site + '].flag']: true
-            })
-          }
-        }
-        else {
-          this.setData({
-            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
-            ['grade[' + this.data.lastSite + '].flag']: false,
-            ['grade[' + site + '].form']: this.data.selectedForm,
-            ['grade[' + site + '].flag']: true
-          })
-        }
-        this.setData({
-          lastSite: site
-        })
-        break;
-
-      case 8:
         if (site == this.data.lastSite) {
           if (this.data.grade[site].flag) {
             this.setData({

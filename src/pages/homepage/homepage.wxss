@@ -71,3 +71,11 @@
   font-size: 30rpx;
   color: #5C5C5C;
 }
+
+/*主动回答号码确定*/
+.checkNumber {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: red;
+}

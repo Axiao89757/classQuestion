@@ -2,7 +2,7 @@
   <!--头部，图片和文字-->
   <view class='head'><view class='subHead'>
     <image src='/images/answer.png' class='headImage'></image>
-    <text class='headText'>为<text class='subHeadText'>{{number}}</text>同学评分</text>
+    <text class='headText'>为<text class='subHeadText'>{{studentNumber}}</text>同学评分</text>
   </view>
   <!--划线-->
   <canvas canvas-id='myCanvas' class='line'></canvas>

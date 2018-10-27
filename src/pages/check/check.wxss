@@ -78,7 +78,8 @@
 
 .subComment {
   width: auto;
-  margin-bottom: 20rpx;
+  height: 300rpx;
+  margin-bottom: 10rpx;
   border-style: solid;
   border-color: black;
 }

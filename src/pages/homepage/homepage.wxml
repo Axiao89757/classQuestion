@@ -21,5 +21,11 @@
       <text class='buttonName'>{{item.name}}</text>
     </button>
   </view>
+
+<!--主动回答号码确定-->  
+<modal hidden="{{hiddenmodalput}}"  bindcancel="cancel" bindconfirm="confirm">  
+    <input type='number' placeholder="请输入学生号码" maxlength='2' bindinput='bindKeyInput'/>
+</modal>
+
 </view>
 
