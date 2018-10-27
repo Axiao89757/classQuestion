@@ -9,16 +9,25 @@ Page({
   
   //确认  
   confirm: function () {
-    if (this.inputNumber < 0 || this.inputNumber > 92)
-    wx.navigateTo({
-      url: '/src/pages/answer/answer?studentNumber=' + "错误"
-    })
-    wx.navigateTo({
-      url: '/src/pages/answer/answer?studentNumber=' + this.inputNumber
-    })
-    this.setData({
-      hiddenmodalput: true
-    })
+    if (this.inputNumber < 0 || this.inputNumber > 92){
+      wx.showModal({
+        title: '错误',
+        content: '未找到该号码学生，请重新输入',
+        showCancel: false
+      }) 
+      this.setData({
+        hiddenmodalput: true
+      })
+    }
+    else{
+      wx.navigateTo({
+        url: '/src/pages/answer/answer?studentNumber=' + this.inputNumber
+      })
+      this.setData({
+        hiddenmodalput: true
+      })
+    }
+    
   },
 
   // 输入
@@ -49,6 +58,7 @@ Page({
    */
   data: {
     hiddenmodalput: true,
+    erroHiddenmodalput: true,
     inputNumber: '00',
     menu: [
       {
