@@ -1,5 +1,5 @@
 <view class='all'>
-  <!--头部，头像和当前班级部分-->
+  <!--1. 头部，头像和当前班级部分-->
   <view class='head'>
     <!--头像-->
     <view class='headPortrait'>
@@ -8,13 +8,13 @@
     <!--文字-->
     <view class='current'>
       <view class='currentClass'>当前班级：</view>
-      <text class='className'>电子信息工程1、2班</text>
+      <text class='className' bindtap='classManage'>{{currentClassName}}</text>
     </view>
   </view>
 
   <!--划线-->
   <canvas canvas-id='myCanvas' class='line'></canvas>
-  <!--菜单部分，记录、主动回答、随机抽查-->
+  <!--2. 菜单部分，记录、主动回答、随机抽查-->
   <view class='menu'>
     <button class='menuButtom' wx:for='{{menu}}' bindtap='{{item.cf}}'>
       <image class='buttonImage' src='{{item.iconImageSrc}}'></image>
@@ -22,9 +22,24 @@
     </button>
   </view>
 
-<!--主动回答号码确定-->  
+<!--3. 主动回答号码获取-->  
 <modal hidden="{{hiddenmodalput}}"  bindcancel="cancel" bindconfirm="confirm">  
     <input type='number' placeholder="请输入学生号码" maxlength='2' bindinput='bindKeyInput'/>
+</modal>
+
+<!--4. 当前班级的设置-->
+<modal titel='当前班级' hidden='{{currentClassSettingHiddent}}' no-cancel='true' confirm-text='完成' bindconfirm='currentClassSettingConfirm' >
+  <!--班级列表-->
+  <scroll-view class='classSetting' scroll-y='true'>
+    <view class='classList' wx:for='{{classList}}' >
+      <text class='classNameOFList' bindtap='classSelect'>{{item.className}}  {{item.studentNumber}}人</text>
+      <image src='/images/rmClass.png' class='rmClassImage' catchtap='rmClass'></image>
+    </view>
+  </scroll-view>
+  <!--添加班级-->
+    <button class='addClass' biandtap='addClass'>
+      <image src='/images/addClass.png' class='addClassImage'></image>
+    </button>
 </modal>
 
 </view>

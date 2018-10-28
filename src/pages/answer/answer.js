@@ -1,7 +1,7 @@
 Page({
 
   onLoad: function (options) {
-    // 获取主页传过来的随机号码
+    // 获取主页传过来的输入号码
     this.setData({
       studentNumber: options.studentNumber
     })

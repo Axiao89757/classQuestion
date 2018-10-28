@@ -1,15 +1,42 @@
 Page({
 
-  //取消
+  /*当前班级的管理*/
+  // ‘班级名’响应
+  classManage: function() {
+    this.setData({
+      currentClassSettingHiddent: false
+    })
+  },
+  // 弹窗确认响应 
+  currentClassSettingConfirm: function() {
+    this.setData({
+      currentClassSettingHiddent: true
+    })
+  },
+  // 删除班级
+  rmClass: function () {
+
+  },
+  // 添加班级
+  addClass: function () {
+
+  },
+  // 选择班级
+  classSelect: function () {
+
+  },
+
+
+  /*主动回答号码获取*/
+  // 弹窗取消响应
   cancel: function () {
     this.setData({
       hiddenmodalput: true
     });
   },
-  
-  //确认  
+  // 弹窗确认响应 
   confirm: function () {
-    if (this.inputNumber < 0 || this.inputNumber > 92){
+    if (this.inputNumber < 0 || this.inputNumber > 92){ // 参数合法性判断
       wx.showModal({
         title: '错误',
         content: '未找到该号码学生，请重新输入',
@@ -27,27 +54,28 @@ Page({
         hiddenmodalput: true
       })
     }
-    
   },
-
-  // 输入
+  // input输入响应
   bindKeyInput: function(e) {
     this.inputNumber = e.detail.value //注意这里不能用this.setData
-
   },
-
+  // ‘主动回答’响应
   answer: function (e) {
     this.setData({
       hiddenmodalput: false,
     })
   },
 
+
+  // ‘随机抽查’响应
   check: function (e) {
     var randomDigit = Math.floor(Math.random() * 93)
     wx.navigateTo({
       url: '/src/pages/check/check?randomDigit=' + randomDigit
     })
   },
+
+  // ‘学生记录’响应
   record: function (e) {
     wx.navigateTo({
       url: '/src/pages/record/record'
@@ -57,9 +85,49 @@ Page({
    * 页面的初始数据
    */
   data: {
-    hiddenmodalput: true,
-    erroHiddenmodalput: true,
+    currentClassSettingHiddent: true, // 班级管理弹窗隐藏控制变量
+    currentClassName: '请选择班级',
+
+    hiddenmodalput: true, // 输入号码弹窗隐藏控制变量
+    erroHiddenmodalput: true, // 输入号码错误弹窗隐藏控制变量
+
     inputNumber: '00',
+
+    classList: [
+      {
+        className: '电子信息工程1、2班',
+        studentNumber: 0
+      },
+      {
+        className: '电子信息工程1、2班',
+        studentNumber: 0
+      },
+      {
+        className: '电子信息工程1、2班',
+        studentNumber: 0
+      },
+      {
+        className: '电子信息工程1、2班',
+        studentNumber: 0
+      },
+      {
+        className: '电子信息工程1、2班',
+        studentNumber: 0
+      },
+      {
+        className: '电子信息工程1、2班',
+        studentNumber: 0
+      },
+      {
+        className: '电子信息工程1、2班',
+        studentNumber: 0
+      },
+      {
+        className: '电子信息工程1、2班',
+        studentNumber: 0
+      }
+    ],
+
     menu: [
       {
         name: '学生记录',

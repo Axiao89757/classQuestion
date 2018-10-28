@@ -72,10 +72,52 @@
   color: #5C5C5C;
 }
 
-/*主动回答号码确定*/
-.checkNumber {
+/*当前班级的设置*/
+.classSetting {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  background-color: red;
+
+  height: 400rpx;
 }
+
+.classList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 80rpx; 
+  margin: 10rpx;
+  padding: 10rpx;
+  border-radius: 7%;
+
+  background-color: #f0f0f0;
+}
+
+.classNameOFList {
+  font-size: 40rpx;
+}
+
+.rmClassImage {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.addClass {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+
+  width: 100%;
+}
+
+.addClassImage {
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #f0f0f0;
+}
+
+
+
