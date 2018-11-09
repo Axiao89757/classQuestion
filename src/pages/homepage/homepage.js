@@ -80,8 +80,18 @@ Page({
   },
 
   // 选择班级
-  classSelect: function () {
-
+  classSelect: function (event) {
+    var that = this
+    var clickName = event.currentTarget.dataset.classname
+    for (var i = 0; i < this.data.classList.length; i++) {
+      if (clickName == this.data.classList[i].className) {
+        this.setData({
+          currentClassName: that.data.classList[i].className,
+          currentClassSettingHiddent: true
+        })
+        return
+      }
+    }
   },
 
 
@@ -165,7 +175,7 @@ Page({
 
     inputNumber: '00',
 
-    classList: [],
+    classList: [], //存放各班级信息
 
     menu: [
       {
