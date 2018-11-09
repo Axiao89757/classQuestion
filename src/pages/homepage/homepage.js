@@ -82,12 +82,19 @@ Page({
   // 选择班级
   classSelect: function (event) {
     var that = this
+    var name
     var clickName = event.currentTarget.dataset.classname
+    // 由event的内容找出是点击了哪一个
     for (var i = 0; i < this.data.classList.length; i++) {
       if (clickName == this.data.classList[i].className) {
+        name = that.data.classList[i].className + that.data.classList[i].studentNumber
         this.setData({
-          currentClassName: that.data.classList[i].className,
+          currentClassName: name,
           currentClassSettingHiddent: true
+        })
+        wx.setStorage({
+          key: 'currentClassName',
+          data: name,
         })
         return
       }
@@ -200,15 +207,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     //每一次加载画面时，将获取数据缓存区的数据进行画面渲染
     try {
-      var value = wx.getStorageSync('classMessage')
-      if (value) {
+      var value1 = wx.getStorageSync('classMessage')
+      if (value1) {
         this.setData({
-          classList: value
+          classList: value1,  
         })
       }
     } catch (e) {}
+
+    try {
+      var value2 = wx.getStorageSync('currentClassName')
+      if (value2) {
+        console.log(value2)
+        this.setData({
+          currentClassName: value2,
+        })
+      }
+    } catch (e) { console.log(value2)}
   },
 
   /**

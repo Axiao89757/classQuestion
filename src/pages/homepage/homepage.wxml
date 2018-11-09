@@ -28,7 +28,7 @@
 </modal>
 
 <!--4. 当前班级的设置-->
-<modal title='当前班级:{{currentClassName}}' hidden='{{currentClassSettingHiddent}}' no-cancel='true' confirm-text='完成' bindconfirm='currentClassSettingConfirm' >
+<modal title='当前班级:{{currentClassName}}{{}}' hidden='{{currentClassSettingHiddent}}' no-cancel='true' confirm-text='完成' bindconfirm='currentClassSettingConfirm' >
   <!--班级列表-->
   <scroll-view class='classSetting' scroll-y='true'>
     <view class='classList' bindtap='classSelect' wx:for='{{classList}}' data-className='{{item.className}}'>
