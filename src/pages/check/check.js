@@ -10,13 +10,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function (options) {
-    // 划线
-    var ct1 = wx.createCanvasContext('myCanvas')
-    ct1.moveTo(0, 0)
-    ct1.lineTo(1000, 0)
-    ct1.setLineWidth(8)
-    ct1.stroke()
-    ct1.draw()
   },
 
   /**

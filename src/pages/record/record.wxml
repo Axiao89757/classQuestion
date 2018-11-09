@@ -1,0 +1,25 @@
+<import src="record-item/record-item-template.wxml" />
+
+<view style='background-color: #f4f4f4'>
+  <view class="content">
+  <view class="nav-box">
+    <image src="{{imageUrl}}" class="iconPic"></image>
+    <text class='headText'>{{className[0]}}</text>
+  </view>
+    <view class="lineBlack"></view>
+  </view>
+  <view class="title">
+    <text class="text1">学生序号</text>
+    <text class="text2">缺勤次数</text>
+    <text class="text3">分数</text>
+    <text class="text4">备注</text>
+  </view>
+  <scroll-view scroll-y="true" class="main-box">
+    <block wx:for="{{postList}}" wx-for-item="item" wx:for-index="idx">
+      <!-- template -->
+      <view>
+        <template is="postItem" data="{{...item}}" />
+      </view>
+    </block>
+  </scroll-view>
+</view>

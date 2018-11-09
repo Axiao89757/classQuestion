@@ -36,17 +36,24 @@ Page({
   },
   // 弹窗确认响应 
   confirm: function () {
-    if (this.inputNumber < 0 || this.inputNumber > 92){ // 参数合法性判断
+    // 参数合法性判断
+    if (!this.inputNumber) {
+      wx.showModal({
+        title: '错误',
+        content: '请输入学生号码',
+        showCancel: false
+      })
+    } else if (this.inputNumber < 0 || this.inputNumber > 92) {
       wx.showModal({
         title: '错误',
         content: '未找到该号码学生，请重新输入',
         showCancel: false
-      }) 
+      })
       this.setData({
         hiddenmodalput: true
       })
     }
-    else{
+    else {
       wx.navigateTo({
         url: '/src/pages/answer/answer?studentNumber=' + this.inputNumber
       })
@@ -54,6 +61,8 @@ Page({
         hiddenmodalput: true
       })
     }
+    
+    
   },
   // input输入响应
   bindKeyInput: function(e) {
@@ -94,38 +103,7 @@ Page({
     inputNumber: '00',
 
     classList: [
-      {
-        className: '电子信息工程1、2班',
-        studentNumber: 0
-      },
-      {
-        className: '电子信息工程1、2班',
-        studentNumber: 0
-      },
-      {
-        className: '电子信息工程1、2班',
-        studentNumber: 0
-      },
-      {
-        className: '电子信息工程1、2班',
-        studentNumber: 0
-      },
-      {
-        className: '电子信息工程1、2班',
-        studentNumber: 0
-      },
-      {
-        className: '电子信息工程1、2班',
-        studentNumber: 0
-      },
-      {
-        className: '电子信息工程1、2班',
-        studentNumber: 0
-      },
-      {
-        className: '电子信息工程1、2班',
-        studentNumber: 0
-      }
+      
     ],
 
     menu: [

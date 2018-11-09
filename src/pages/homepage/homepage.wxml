@@ -13,7 +13,7 @@
   </view>
 
   <!--划线-->
-  <canvas canvas-id='myCanvas' class='line'></canvas>
+  <view class="lineBlack"></view>
   <!--2. 菜单部分，记录、主动回答、随机抽查-->
   <view class='menu'>
     <button class='menuButtom' wx:for='{{menu}}' bindtap='{{item.cf}}'>
@@ -32,7 +32,7 @@
   <!--班级列表-->
   <scroll-view class='classSetting' scroll-y='true'>
     <view class='classList' wx:for='{{classList}}' >
-      <text class='classNameOFList' bindtap='classSelect'>{{item.className}}  {{item.studentNumber}}人</text>
+      <text class='classNameOFList' bindtap='classSelect'>{{item.className}}  {{item.studentNumber}}</text>
       <image src='/images/rmClass.png' class='rmClassImage' catchtap='rmClass'></image>
     </view>
   </scroll-view>

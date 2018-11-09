@@ -30,12 +30,12 @@
 }
 
 /*划线*/
-.line {
-  width: 87%;
-  height: 15rpx;
-  margin-left: 50rpx;
+.lineBlack {
+  height: 8rpx;
+  background: black;
+  width: 90%;
+  margin: 10rpx auto;
 }
-
 
 /*评分*/
 .selection{

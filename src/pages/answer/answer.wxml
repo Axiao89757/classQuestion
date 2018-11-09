@@ -5,7 +5,7 @@
     <text class='headText'>为<text class='subHeadText'>{{studentNumber}}</text>同学评分</text>
   </view>
   <!--划线-->
-  <canvas canvas-id='myCanvas' class='line'></canvas>
+  <view class="lineBlack"></view>
   </view>
 
   <!--评分部分-->

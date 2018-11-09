@@ -1,11 +1,12 @@
 <view class='menuPage'>
   <!--头部，图片和文字-->
-  <view class='head'><view class='subHead'>
-    <image src='/images/check.png' class='headImage'></image>
-    <text class='headText'>为<text class='subHeadText'>{{number}}</text>同学评分</text>
-  </view>
-  <!--划线-->
-  <canvas canvas-id='myCanvas' class='line'></canvas>
+  <view class='head'>
+    <view class='subHead'>
+      <image src='/images/check.png' class='headImage'></image>
+      <text class='headText'>为<text class='subHeadText'>{{number}}</text>同学评分</text>
+    </view>
+    <!--划线-->
+    <view class="lineBlack"></view>
   </view>
 
   <!--评分部分-->

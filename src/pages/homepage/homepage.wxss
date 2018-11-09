@@ -37,10 +37,11 @@
 }
 
 /*划线*/
-.line {
-  width: 87%;
-  height: 15rpx;
-  margin-left: 48rpx;
+.lineBlack {
+  height: 8rpx;
+  background: black;
+  width: 90%;
+  margin: 10rpx auto;
 }
 
 /*菜单部分，记录、主动回答、随机抽查*/
@@ -105,6 +106,7 @@
 }
 
 .addClass {
+  height: 100rpx;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,8 +116,8 @@
 }
 
 .addClassImage {
-  width: 100rpx;
-  height: 100rpx;
+  width: 80rpx;
+  height: 80rpx;
   background-color: #f0f0f0;
 }
 

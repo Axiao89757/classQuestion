@@ -1,5 +1,5 @@
 {
-  "navigationBarBackgroundColor": "#f7f7f7",
-  "navigationBarTitleText": "记录",
-  "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#f7f7f7",
+    "navigationBarTitleText": "随机抽问",
+    "navigationBarTextStyle": "black"
 }

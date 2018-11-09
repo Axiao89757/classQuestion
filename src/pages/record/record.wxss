@@ -1,1 +1,66 @@
-/* src/pages/record/record.wxss */
+@import "record-item/record-item-template.wxss";
+
+.content {
+  width:100%;
+}
+
+a {
+  list-style: none;
+}
+.nav-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  background-color: #f7f7f7;
+
+}
+.headText {
+  margin-top: 110rpx;
+  font-size: 35rpx;
+  font-weight: bold;
+  color: #5C5C5C;
+}
+.iconPic {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 50rpx;
+  margin-top: 50rpx;
+  margin-bottom: 20rpx;
+}
+.title {
+  width: 90%;
+  margin: 20rpx auto;
+  position: relative;
+  background-color: #f4f4f4
+}
+.title text { 
+  font-size: 30rpx;
+}
+.select-box {
+  position: absolute;
+  bottom: 20rpx;
+  right:0rpx;
+}
+.main-box {
+}
+.lineBlack {
+  height: 10rpx;
+  background: black;
+  width: 90%;
+  margin: 10rpx auto;
+}
+.text1 {
+  margin-right: 20rpx;
+  font-size: 33rpx;
+}
+.text2 {
+  margin-right: 40rpx;
+  font-size: 33rpx;
+}
+.text4 {
+  position: absolute;
+  font-size: 33rpx;
+  right: 80rpx;
+  bottom: 0rpx;
+}
