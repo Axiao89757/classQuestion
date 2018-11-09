@@ -24,22 +24,31 @@
 
 <!--3. 主动回答号码获取-->  
 <modal hidden="{{hiddenmodalput}}"  bindcancel="cancel" bindconfirm="confirm">  
-    <input type='number' placeholder="请输入学生号码" maxlength='2' bindinput='bindKeyInput'/>
+    <input class='inputAnswerStudent' type='number' placeholder="请输入学生号码" maxlength='2' bindinput='bindKeyInput'/>
 </modal>
 
 <!--4. 当前班级的设置-->
 <modal titel='当前班级' hidden='{{currentClassSettingHiddent}}' no-cancel='true' confirm-text='完成' bindconfirm='currentClassSettingConfirm' >
   <!--班级列表-->
   <scroll-view class='classSetting' scroll-y='true'>
-    <view class='classList' wx:for='{{classList}}' >
-      <text class='classNameOFList' bindtap='classSelect'>{{item.className}}  {{item.studentNumber}}</text>
+    <view class='classList' bindtap='classSelect' wx:for='{{classList}}'>
+      <text class='classNameOFList' style='color: black'>{{item.className}}{{item.studentNumber}}</text>
       <image src='/images/rmClass.png' class='rmClassImage' catchtap='rmClass'></image>
     </view>
   </scroll-view>
   <!--添加班级-->
-    <button class='addClass' biandtap='addClass'>
-      <image src='/images/addClass.png' class='addClassImage'></image>
-    </button>
+  <button class='addClass' bindtap='addClass'>
+    <image src='/images/addClass.png' class='addClassImage'></image>
+  </button>
+
+  <!--输入具体班级名和人数-->
+  <modal hidden='{{hiddenInputClassMessages}}' bindconfirm='inputClassMessagesConfirm' bindcancel='inputClassMessagesCancel' confirm-text='添加'>
+    <text class='inputTittle'>班级名：</text>
+    <input placeholder='名称最多不超过10个字' class='inputClassMessages' bindinput='inputClassName' maxlength='10'></input>
+    <text class='inputTittle'>人数：</text>
+    <input placeholder='人数最多不能超过300' type='number' class='inputClassMessages' bindinput='inputStudentNumber' maxlength='3'></input>
+  </modal>
+
 </modal>
 
 </view>

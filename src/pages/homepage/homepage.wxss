@@ -73,6 +73,16 @@
   color: #5C5C5C;
 }
 
+/*主动回答弹窗*/
+.inputAnswerStudent {
+  height: 70rpx;
+  margin: 10rpx;
+  border: solid;
+  border-width: 3rpx;
+
+  font-size: 35rpx;
+}
+
 /*当前班级的设置*/
 .classSetting {
   display: flex;
@@ -119,6 +129,19 @@
   width: 80rpx;
   height: 80rpx;
   background-color: #f0f0f0;
+}
+
+/*填写班级信息*/
+.inputTittle {
+  font-weight:bold; 
+  color:black; 
+  font-size:35rpx;
+}
+.inputClassMessages {
+  height: 70rpx;
+  border: solid;
+  border-width: 3rpx;
+  font-size:35rpx;
 }
 
 
