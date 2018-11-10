@@ -33,7 +33,7 @@
   <scroll-view class='classSetting' scroll-y='true'>
     <view class='classList' bindtap='classSelect' wx:for='{{classList}}' data-className='{{item.className}}'>
       <text class='classNameOFList' style='color: black'>{{item.className}}{{item.studentNumber}}</text>
-      <image src='/images/rmClass.png' class='rmClassImage' catchtap='rmClass'></image>
+      <image src='/images/rmClass.png' class='rmClassImage' catchtap='rmClass' data-className='{{item.className}}'></image>
     </view>
   </scroll-view>
   <!--添加班级-->
@@ -41,7 +41,7 @@
     <image src='/images/addClass.png' class='addClassImage'></image>
   </button>
 
-  <!--输入具体班级名和人数-->
+  <!--输入具体班级名和人数弹窗-->
   <modal hidden='{{hiddenInputClassMessages}}' bindconfirm='inputClassMessagesConfirm' bindcancel='inputClassMessagesCancel' confirm-text='添加'>
     <text class='inputTittle'>班级名：</text>
     <input placeholder='名称最多不超过10个字' class='inputClassMessages' bindinput='inputClassName' maxlength='10'></input>

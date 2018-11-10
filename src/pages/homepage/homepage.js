@@ -1,6 +1,8 @@
 Page({
 
-  /*当前班级的管理*/
+  /**
+   * 当前班级的管理
+   */
   // ‘班级名’响应
   classManage: function() {
     this.setData({
@@ -13,12 +15,7 @@ Page({
       currentClassSettingHiddent: true
     })
   },
-  // 删除班级
-  rmClass: function () {
-
-  },
-
-  /* 添加班级 */
+  /* 一、添加班级 */
   // 点击添加按钮响应
   addClass: function () {
     this.setData({
@@ -38,7 +35,7 @@ Page({
   inputClassMessagesConfirm: function () {
     var name = this.inputTempClassName
     var num = this.inputTempStudentNumber
-    var obj = {className: name, studentNumber: '(' + num + '人)'} //把班级名和人数做成一个对象
+    var obj = { className: name, studentNumber: '(' + num + '人)' } //把班级名和人数做成一个对象
     // 判断输入是否合法
     // 判断输入名字是否已经存在
     var nameAlreadExist = false
@@ -86,7 +83,7 @@ Page({
         duration: 2000
       })
     }
-    
+
   },
   // 信息填写取消响应
   inputClassMessagesCancel: function () {
@@ -95,7 +92,72 @@ Page({
     })
   },
 
-  // 选择班级
+
+  /* 二、删除班级 */
+  rmClass: function (event) {
+    var clickName = event.currentTarget.dataset.classname
+    console.log(clickName)
+    var index
+    var that = this
+    // 1. 先找出点击了哪一个班级
+    for (var i = 0; i < this.data.classList.length; i++) {
+      if (clickName == this.data.classList[i].className) {
+        index = i
+      }
+    }  
+    
+    // 2. 弹窗确认
+    wx.showModal({
+      title: '确定删除该班级？',
+      content: '这将是一个不可逆操作，该班级的学生信息将一并全部删除！',
+      confirmColor: 'red',
+      cancelColor: 'green',
+      success (res) { 
+        if (res.confirm) {
+          // 2.1 重置当前班级的显示
+          if (that.data.classList.length == 1) { // 2.1.1 列表只有一个班级时，删除班级后，当前班级设置为'请选择班级'
+            that.setData({
+              currentClassName: '请选择班级'
+            })
+          } else if (clickName + that.data.classList[index].studentNumber == that.data.currentClassName && index != 0) { // 2.1.2 另外，若删除班级不是0下标班级且删除班级为当前班级时，删除班级后，当前班级设置者为0下标的班级
+            console.log(that.data.currentClassName)
+            that.setData({
+              currentClassName: that.data.classList[0].className + that.data.classList[0].studentNumber
+            })
+          } else if (clickName + that.data.classList[index].studentNumber == that.data.currentClassName && index == 0) { // 2.1.3 另外，若删除班级是0下标且为当前班级时，删除班级后，当前班级设置者为1下标的班级
+            that.setData({
+              currentClassName: that.data.classList[1].className + that.data.classList[1].studentNumber
+            })
+          } // 2.1.4 另外，若删除班级不是当前班级，则当前班级不变
+          // 2.1.5 更新本地数据中的currentClassName
+          wx.setStorage({
+            key: 'currentClassName',
+            data: that.data.currentClassName,
+          })
+
+          // 2.2 更新本地数据中的classMessage，同时更新班级列表渲染
+          var update = that.data.classList // 2.2.1 复制原数组
+          update.splice(index, 1) // 2.2.2 splice方法删除副本数组中下标为index的一项
+          that.setData({ 
+            classList: update // 2.2.3 更新渲染数据，让旧数组等于它的副本
+          }) 
+          wx.setStorage({ // 2.2.4 更新本地数据
+            key: 'classMessage',
+            data: that.data.classList,
+          })
+
+          // 2.3 Toast消息提示框提示删除成功
+          wx.showToast({ // 2. 
+            title: '删除成功',
+          })
+        } else if (res.cancel) {}
+      }
+    })
+
+  },
+
+  
+  /*三、选择班级*/
   classSelect: function (event) {
     var that = this
     var name
@@ -109,7 +171,7 @@ Page({
           currentClassSettingHiddent: true
         })
         wx.showToast({
-          title: '成功',
+          title: '选择成功',
           icon: 'success',
           duration: 2000
         })
@@ -122,6 +184,7 @@ Page({
       }
     }
   },
+
 
 
   /*主动回答号码获取*/
@@ -239,13 +302,16 @@ Page({
         })
       }
     } catch (e) {}
-
     try {
       var value2 = wx.getStorageSync('currentClassName')
       if (value2) {
         console.log(value2)
         this.setData({
           currentClassName: value2,
+        })
+      } else {
+        this.setData({
+          currentClassName: '请选择班级',
         })
       }
     } catch (e) {}
