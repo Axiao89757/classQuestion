@@ -1,8 +1,6 @@
 Page({
 
-  /**
-   * 当前班级的管理
-   */
+  /*一、当前班级的管理*/
   // ‘班级名’响应
   classManage: function() {
     this.setData({
@@ -15,7 +13,7 @@ Page({
       currentClassSettingHiddent: true
     })
   },
-  /* 一、添加班级 */
+  /* 1、添加班级 */
   // 点击添加按钮响应
   addClass: function () {
     this.setData({
@@ -62,21 +60,34 @@ Page({
       })
     } else if (num > 300) { // 人数不能超过300
       wx.showModal({
-        content: '技术有限，目前一个班最多只能支持300人,带来不便还请谅解！',
+        content: '技术有限，目前一个班最多只支持300人,带来不便还请谅解！',
       })
     } else {
       this.data.classList.push(obj) // 用数组的push()函数将obj添加到对象数组中
       var update = this.data.classList // 复制一份数组，以便后面的画面渲染赋值使用
+
+      for (let i = 0; i < num; i++) { // 为新添加的班级初始化学生相关信息
+        var student = {id: i+1, absentCount: 0, beLatedCount: 0, score: 60, remark: ''}
+        this.data.studentList[i] = student
+      }
+      // 画面渲染赋值
       this.setData({
         classList: update
       })
-      wx.setStorage({
+      // 更新本地数据
+      wx.setStorage({ // 全部班级数组
         key: 'classMessage',
         data: this.data.classList
       })
+      wx.setStorage({ // 新添班级的全部学生信息
+        key: name,
+        data: this.data.studentList,
+      })
+      // 隐藏弹窗
       this.setData({
         hiddenInputClassMessages: true
       })
+      // 消息提示框显示
       wx.showToast({
         title: '添加成功',
         icon: 'success',
@@ -91,9 +102,7 @@ Page({
       hiddenInputClassMessages: true
     })
   },
-
-
-  /* 二、删除班级 */
+  /* 2、删除班级 */
   rmClass: function (event) {
     var clickName = event.currentTarget.dataset.classname
     console.log(clickName)
@@ -155,9 +164,7 @@ Page({
     })
 
   },
-
-  
-  /*三、选择班级*/
+  /* 3、选择班级*/
   classSelect: function (event) {
     var that = this
     var name
@@ -187,7 +194,7 @@ Page({
 
 
 
-  /*主动回答号码获取*/
+  /*二、主动回答的实现*/
   // 弹窗取消响应
   cancel: function () {
     this.setData({
@@ -196,6 +203,16 @@ Page({
   },
   // 弹窗确认响应 
   confirm: function () {
+    try {
+      // 获取当前班级名
+      var currentClassName = wx.getStorageSync('currentClassName')
+      if (currentClassName) {
+        // 获取名字中的人数信息
+        var startIndex = currentClassName.lastIndexOf('(') + 1
+        var endIndex = currentClassName.lastIndexOf('人')
+        var num = parseInt(currentClassName.slice(startIndex, endIndex))
+      } 
+    } catch (e) { }
     // 参数合法性判断
     if (!this.inputNumber) {
       wx.showModal({
@@ -203,10 +220,10 @@ Page({
         content: '请输入学生号码',
         showCancel: false
       })
-    } else if (this.inputNumber < 0 || this.inputNumber > 92) {
+    } else if (this.inputNumber < 0 || this.inputNumber > num) {
       wx.showModal({
         title: '错误',
-        content: '未找到该号码学生，请重新输入',
+        content: '没有' + this.inputNumber + '号学生，请重新输入',
         showCancel: false
       })
       this.setData({
@@ -221,8 +238,6 @@ Page({
         hiddenmodalput: true
       })
     }
-    
-    
   },
   // input输入响应
   bindKeyInput: function(e) {
@@ -230,21 +245,47 @@ Page({
   },
   // ‘主动回答’响应
   answer: function (e) {
-    this.setData({
-      hiddenmodalput: false,
-    })
+    try {
+      // 获取当前班级名
+      var currentClassName = wx.getStorageSync('currentClassName')
+      if (currentClassName == '请选择班级') {
+        wx.showModal({
+          content: '请先选择当前班级',
+        })
+      } else {
+          this.setData({
+            hiddenmodalput: false,
+          })
+        }
+    } catch (e) { }
   },
 
 
-  /*‘随机抽查’响应*/
+  /*三、随机抽查的实现*/
   check: function (e) {
-    var randomDigit = Math.floor(Math.random() * 93)
-    wx.navigateTo({
-      url: '/src/pages/check/check?randomDigit=' + randomDigit
-    })
+    try {
+      // 获取当前班级名
+      var currentClassName = wx.getStorageSync('currentClassName') 
+      if (currentClassName != '请选择班级') {
+        // 获取名字中的人数信息
+        var startIndex = currentClassName.lastIndexOf('(') + 1
+        var endIndex = currentClassName.lastIndexOf('人')
+        var num = parseInt(currentClassName.slice(startIndex, endIndex))
+        // 生成随机数
+        var randomDigit = Math.floor(Math.random() * num) + 1
+        // 页面跳转
+        wx.navigateTo({
+          url: '/src/pages/check/check?randomDigit=' + randomDigit
+        })
+      } else {
+        wx.showModal({
+          content: '请先选择当前班级',
+        })
+      }
+    } catch (e) {}
   },
 
-  /*‘学生记录’响应*/
+  /*四、学生记录的实现*/
   record: function (e) {
     wx.navigateTo({
       url: '/src/pages/record/record'
@@ -256,7 +297,7 @@ Page({
    */
   data: {
     currentClassSettingHiddent: true, // 班级管理弹窗隐藏控制变量
-    currentClassName: '请选择班级',
+    currentClassName: '请选择班级', // 默认情况下的当前班级
 
     hiddenInputClassMessages: true, // 输入班级信息弹窗控制
     inputTempClassName: '', // 输入班级名暂时量
@@ -267,7 +308,8 @@ Page({
 
     inputNumber: '00',
 
-    classList: [], //存放各班级信息
+    classList: [], // 存放各班级信息
+    studentList: [], // 存放当前班级的学生信息
 
     menu: [
       {
