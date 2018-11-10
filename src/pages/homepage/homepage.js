@@ -40,19 +40,30 @@ Page({
     var num = this.inputTempStudentNumber
     var obj = {className: name, studentNumber: '(' + num + '人)'} //把班级名和人数做成一个对象
     // 判断输入是否合法
-    if (!name) {
+    // 判断输入名字是否已经存在
+    var nameAlreadExist = false
+    for (var i = 0; i < this.data.classList.length; i++) {
+      if (name == this.data.classList[i].className) {
+        nameAlreadExist = true
+      }
+    }
+    if (!name) { // 班级名不能为空
       wx.showModal({
         content: '还没填写名字呢！',
       })
-    } else if (!num) {
+    } else if (nameAlreadExist) { // 班级名不能重复
+      wx.showModal({
+        content: '该班级已经存在',
+      })
+    } else if (!num) { // 人数不能为空
       wx.showModal({
         content: '还没填写人数呢！',
       })
-    } else if (num < 1) {
+    } else if (num < 1) { // 人数不能为0或者负数
       wx.showModal({
         content: '不可能只有0人吧？',
       })
-    } else if (num > 300) {
+    } else if (num > 300) { // 人数不能超过300
       wx.showModal({
         content: '技术有限，目前一个班最多只能支持300人,带来不便还请谅解！',
       })
@@ -68,6 +79,11 @@ Page({
       })
       this.setData({
         hiddenInputClassMessages: true
+      })
+      wx.showToast({
+        title: '添加成功',
+        icon: 'success',
+        duration: 2000
       })
     }
     
@@ -92,10 +108,16 @@ Page({
           currentClassName: name,
           currentClassSettingHiddent: true
         })
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+        })
         wx.setStorage({
           key: 'currentClassName',
           data: name,
         })
+        // 上面setData和setStorage各自内部的数据不共享
         return
       }
     }
@@ -226,7 +248,7 @@ Page({
           currentClassName: value2,
         })
       }
-    } catch (e) { console.log(value2)}
+    } catch (e) {}
   },
 
   /**
