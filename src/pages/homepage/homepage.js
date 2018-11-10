@@ -67,7 +67,7 @@ Page({
       var update = this.data.classList // 复制一份数组，以便后面的画面渲染赋值使用
 
       for (let i = 0; i < num; i++) { // 为新添加的班级初始化学生相关信息
-        var student = {id: i+1, absentCount: 0, beLatedCount: 0, score: 60, remark: ''}
+        var student = { id: i + 1, beLatedCount: 0, absentCount: 0,score: 60, remark: ''}
         this.data.studentList[i] = student
       }
       // 画面渲染赋值

@@ -1,8 +1,0 @@
-<template name="postItem">
-  <view class="item-box">
-    <text class="item-text ml50">{{postId}}</text>
-    <text class="item-text" catchtap="addTime">{{absence}}</text>
-    <text class="item-text" catchtap="addScore">{{score}}</text>
-    <button class="item-button">{{remarks}}</button>
-  </view>
-</template>

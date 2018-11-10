@@ -1,25 +1,28 @@
-<import src="record-item/record-item-template.wxml" />
-
-<view style='background-color: #f4f4f4'>
-  <view class="content">
-  <view class="nav-box">
-    <image src="{{imageUrl}}" class="iconPic"></image>
-    <text class='headText'>{{className[0]}}</text>
-  </view>
+<view class='all'>
+  <view class="head">
+    <view class="nav-box">
+      <image src="{{imageUrl}}" class="headPic"></image>
+      <text class='headText'>{{currentClassName}}</text>
+    </view>
     <view class="lineBlack"></view>
   </view>
-  <view class="title">
-    <text class="text1">学生序号</text>
-    <text class="text2">缺勤次数</text>
-    <text class="text3">分数</text>
-    <text class="text4">备注</text>
-  </view>
-  <scroll-view scroll-y="true" class="main-box">
-    <block wx:for="{{postList}}" wx-for-item="item" wx:for-index="idx">
-      <!-- template -->
-      <view>
-        <template is="postItem" data="{{...item}}" />
+
+  <view class="data">
+    <view class='titelBar'>
+      <view class='barText'>序号</view>
+      <view class='barText'>迟次</view>
+      <view class='barText'>缺次</view>
+      <view class='barText'>分数</view>
+      <view class='barText'>备注</view>
+    </view>
+    <scroll-view scroll-y='true' class='scroll'>
+      <view wx:for='{{studentList}}' class='aLine'>
+        <view class='text'>{{item.id}}</view>
+        <view class='text'>{{item.beLatedCount}}</view>
+        <view class='text'>{{item.absentCount}}</view>
+        <view class='text'>{{item.score}}</view>
+        <image src='/images/remark.png' class='remarkPic'></image>
       </view>
-    </block>
-  </scroll-view>
+    </scroll-view>
+  </view>
 </view>

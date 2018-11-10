@@ -1,66 +1,88 @@
-@import "record-item/record-item-template.wxss";
+.all {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f7f7f7;
+}
 
-.content {
+.head {
   width:100%;
 }
 
-a {
-  list-style: none;
-}
 .nav-box {
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: baseline;
   background-color: #f7f7f7;
+}
 
-}
-.headText {
-  margin-top: 110rpx;
-  font-size: 35rpx;
-  font-weight: bold;
-  color: #5C5C5C;
-}
-.iconPic {
+.headPic {
   width: 120rpx;
   height: 120rpx;
   margin-right: 50rpx;
   margin-top: 50rpx;
   margin-bottom: 20rpx;
 }
-.title {
-  width: 90%;
-  margin: 20rpx auto;
-  position: relative;
-  background-color: #f4f4f4
+
+.headText {
+  margin-top: 110rpx;
+  font-size: 35rpx;
+  font-weight: bold;
+  color: #5C5C5C;
 }
-.title text { 
-  font-size: 30rpx;
-}
-.select-box {
-  position: absolute;
-  bottom: 20rpx;
-  right:0rpx;
-}
-.main-box {
-}
+
+/*划线*/
 .lineBlack {
   height: 10rpx;
   background: black;
   width: 90%;
   margin: 10rpx auto;
 }
-.text1 {
-  margin-right: 20rpx;
-  font-size: 33rpx;
+
+.data {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 }
-.text2 {
-  margin-right: 40rpx;
-  font-size: 33rpx;
+
+.titelBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
-.text4 {
-  position: absolute;
-  font-size: 33rpx;
-  right: 80rpx;
-  bottom: 0rpx;
+
+.scroll {
+  height: 70vh;
+}
+
+.barText {
+  font-size: 40rpx;
+  margin: 10rpx;
+  font-weight: bold;
+  color: #5C5C5C;
+}
+
+.text {
+  font-size: 40rpx;
+  margin: 10rpx;
+}
+
+.aLine {
+  width: 100%;
+  height: 70rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: solid;
+  border-width: 1rpx;
+  margin: 10rpx auto;
+}
+
+.remarkPic {
+  margin: 10rpx;
+  width: 60rpx;
+  height: 60rpx;
 }

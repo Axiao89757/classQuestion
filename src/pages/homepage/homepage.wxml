@@ -24,7 +24,7 @@
 
 <!--3. 主动回答号码获取-->  
 <modal hidden="{{hiddenmodalput}}"  bindcancel="cancel" bindconfirm="confirm">  
-    <input class='inputAnswerStudent' type='number' placeholder="请输入学生号码" maxlength='2' bindinput='bindKeyInput'/>
+    <input class='inputAnswerStudent' type='number' placeholder="请输入学生号码" maxlength='3' bindinput='bindKeyInput'/>
 </modal>
 
 <!--4. 当前班级的设置-->
