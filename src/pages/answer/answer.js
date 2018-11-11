@@ -5,19 +5,40 @@ Page({
     this.setData({
       studentNumber: options.studentNumber
     })
+    // 获取不含人数的当前班级名pearName
+    try {
+      var name = wx.getStorageSync('currentClassName')
+      if (name) {
+        var endIndex = name.lastIndexOf('(')
+        var pearName = name.slice(0, endIndex)
+        this.setData({
+          currentClassName: pearName
+        })
+      } else {
+        console.log('获取当前班级名失败')
+      }
+    } catch (e) {
+      console.log('获取当前班级名失败')
+    }
+    // 获取本地数据，得到当前班级的全部学生的信息
+    try {
+      var list = wx.getStorageSync(pearName)
+      if (list) {
+        this.setData({
+          studentList: list,
+          currentStudent: list[options.studentNumber - 1] // 创建并初始化被选中同学的对象
+        })
+      }
+    } catch (e) {
+      console.log('获取当前班级全部学生信息失败')
+    }
   },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function (e) {
-    var ct1 = wx.createCanvasContext('myCanvas')
-    ct1.moveTo(0, 0)
-    ct1.lineTo(1000, 0)
-    ct1.setLineWidth(8)
-    ct1.stroke()
-    ct1.draw()
-
   },
 
   /**
@@ -25,6 +46,7 @@ Page({
    */
   data: {
     studentNumber: '00',
+    currentScore: null, // 当前得分
 
     grade: [
       {
@@ -231,34 +253,64 @@ Page({
           lastSite: site
         })
         break;
+    }
+  },
 
-      case 5:
-        if (site == this.data.lastSite) {
-          if (this.data.grade[site].flag) {
-            this.setData({
-              ['grade[' + site + '].form']: this.data.defaultForm,
-              ['grade[' + site + '].flag']: false
-            })
-          }
-          else {
-            this.setData({
-              ['grade[' + site + '].form']: this.data.selectedForm,
-              ['grade[' + site + '].flag']: true
-            })
-          }
-        }
-        else {
-          this.setData({
-            ['grade[' + this.data.lastSite + '].form']: this.data.defaultForm,
-            ['grade[' + this.data.lastSite + '].flag']: false,
-            ['grade[' + site + '].form']: this.data.selectedForm,
-            ['grade[' + site + '].flag']: true
-          })
-        }
-        this.setData({
-          lastSite: site
-        })
-        break;
+  /*确定提交*/
+  submit: function (e) {
+    // 找出被选中的评分项
+    var index = -1
+    for (let i = 0; i < 5; i++) {
+      if (this.data.grade[i].flag) {
+        index = i
+        break
+      }
+    }
+    // 根据index改变响应的学生信息
+    switch (index) {
+      case 0:
+        this.data.currentScore = 5
+        break
+
+      case 1:
+        this.data.currentScore = 3
+        break
+
+      case 2:
+        this.data.currentScore = 2
+        break
+
+      case 3:
+        this.data.currentScore = 1
+        break
+
+      case 4:
+        this.data.currentScore = 0
+        break
+    }
+    // 判断是否有选择了评分，没有的话，提示还没有进行评分，数据不用更新
+    if (this.data.currentScore != null) {
+      this.data.currentStudent.score += this.data.currentScore // 总分更新
+      // 替换掉班级数组中的旧的数据
+      this.data.studentList.splice(this.data.studentNumber - 1, 1, this.data.currentStudent)
+      // 更新本地数据
+      wx.setStorage({
+        key: this.data.currentClassName,
+        data: this.data.studentList,
+      })
+      // 跳转回到主界面，然后提示消息：已经评分成功
+      wx.navigateTo({
+        url: '/src/pages/homepage/homepage',
+      })
+      wx.showToast({
+        title: '评分成功',
+      })
+    }
+    else {
+      wx.showModal({
+        content: '还没有评分呢！',
+        showCancel: false,
+      })
     }
   }
 })

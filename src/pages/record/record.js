@@ -15,24 +15,18 @@ Page({
     try {
       var name = wx.getStorageSync('currentClassName')
       if (name) {
-        if (name == '请选择班级') {
-          wx.showModal({
-            content: '请先选择当前班级',
-          })
-        } else {
-            this.setData({
-              currentClassName: name
-            })
-            var endIndex = name.lastIndexOf('(')
-            var pearName = name.slice(0, endIndex)
-          }
+        this.setData({
+          currentClassName: name
+        })
+        var endIndex = name.lastIndexOf('(')
+        var pearName = name.slice(0, endIndex)
       } else {
         console.log('获取当前班级名失败')
       }
     } catch (e) {
       console.log('获取当前班级名失败')
     }
-    // 获取本地数据，得到当前班级的全部学生的信息
+    // 获取本地数据，通过pearName得到当前班级的全部学生的信息
     try {
       var list = wx.getStorageSync(pearName)
       if (list) {
